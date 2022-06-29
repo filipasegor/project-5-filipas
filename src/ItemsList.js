@@ -6,9 +6,9 @@ export default function ItemsList(props){
 
 return <>
     <ul className="ui-list">
-      {props.items.map((item) => (
-        <li>
-        <Item key={uuid()} id={uuid()} info={item} />
+      {props.items.map((item, index) => (
+        <li key={item.id}>
+        <Item info={item} />
         <button className="item-button" onClick={props.onDeleteClick}>
           Удалить
         </button>

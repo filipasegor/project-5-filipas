@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import uuid from "react-uuid";
 import ItemsList from "./ItemsList.js";
 import Item from "./Item.js";
+import AddItem from "./AddItem.js";
 
 export default function Shop() {
   // const items = [];
@@ -10,6 +11,7 @@ export default function Shop() {
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   const [validation, setValidation] = useState("");
+  const [total, setTotal] = useState("");
 
   function handleFormSubmit(e) {
     e.preventDefault();
@@ -25,13 +27,24 @@ export default function Shop() {
       setName("");
       setDesc("");
       setValidation("");
+      setTotal(items.length + 1)
     }
 
     console.log(items);
   }
 
+  function handleNameChange(e) {
+    setName(e.target.value);
+  }
+
+  function handleDescChange(e) {
+    setDesc(e.target.value);
+  }
+
+
   function handleDeleteClick() {
     setItems(items.splice(1));
+    setTotal(items.length - 1)
   }
 
   const uiTitle = (
@@ -40,46 +53,14 @@ export default function Shop() {
     </div>
   );
 
-
   return (
     <>
       {items.length > 0 ? !uiTitle : uiTitle}
+      <AddItem onFormSubmit={handleFormSubmit} name={name} onNameChange={handleNameChange} onDescChange={handleDescChange} desc={desc} onButtonClick={handleFormSubmit} validation={validation}/>
 
-      <form onSubmit={handleFormSubmit}>
-        <div>
-          <label htmlFor="name"></label>
-          <input
-            type="text"
-            name="name"
-            placeholder="Название товара"
-            className="ui-textfield"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="desc"></label>
-          <input
-            type="text"
-            name="desc"
-            placeholder="Описание товара"
-            className="ui-textfield"
-            value={desc}
-            onChange={(e) => setDesc(e.target.value)}
-          />
-        </div>
-        <div className="form-footer">
-          <div className="validation">{validation}</div>
-          <input
-            type="submit"
-            className="ui-button"
-            value="Добавить"
-            onClick={handleFormSubmit}
-          />
-        </div>
-      </form>
-
-      <ItemsList items={items} onDeleteClick={handleDeleteClick} />
+      <ItemsList onDeleteClick={handleDeleteClick} items={items} />
+      <h2>Всего добавлено:{total}</h2>
     </>
   );
+
 }
