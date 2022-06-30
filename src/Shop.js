@@ -11,7 +11,7 @@ export default function Shop() {
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   const [validation, setValidation] = useState("");
-  const [total, setTotal] = useState("");
+  const [total, setTotal] = useState(0);
 
   function handleFormSubmit(e) {
     e.preventDefault();
@@ -27,7 +27,7 @@ export default function Shop() {
       setName("");
       setDesc("");
       setValidation("");
-      setTotal(items.length + 1)
+      setTotal(total + 1)
     }
 
     console.log(items);
@@ -44,7 +44,7 @@ export default function Shop() {
 
   function handleDeleteClick() {
     setItems(items.splice(1));
-    setTotal(items.length - 1)
+    setTotal(total - 1)
   }
 
   const uiTitle = (
@@ -53,13 +53,19 @@ export default function Shop() {
     </div>
   );
 
+  const uiTotal = (
+    <div>
+      <h2 className="ui-title">Всего добавлено:{total}</h2>
+    </div>
+  )
+
   return (
     <>
       {items.length > 0 ? !uiTitle : uiTitle}
       <AddItem onFormSubmit={handleFormSubmit} name={name} onNameChange={handleNameChange} onDescChange={handleDescChange} desc={desc} onButtonClick={handleFormSubmit} validation={validation}/>
 
       <ItemsList onDeleteClick={handleDeleteClick} items={items} />
-      <h2>Всего добавлено:{total}</h2>
+      {items.length === 0 ? !uiTotal : uiTotal}
     </>
   );
 
