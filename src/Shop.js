@@ -9,31 +9,40 @@ export default function Shop() {
   const [items, setItems] = useState(() => {
     const saved = localStorage.getItem("items");
     if(saved){
-      return JSON.parse(saved)
-    } else{
-      return [];
+      return JSON.parse(saved);
+    } else {
+      return []
     }
   });
 
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   const [validation, setValidation] = useState("");
-  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(items))
   }, [items]);
 
 
+  // useEffect(() => {
+  //   if(items.lenght === 0){
+  //     document.getElementById("items-lenght").innerHTML = "Товары не добавлены";
+  //   } else {
+  //     document.getElementById("items-lenght").innerHTML = `Добавлено ${items.lenght}`;
+  //   }
+  // });
+
   useEffect(() => {
-    if(items.lenght === 0){
-      document.getElementById("items-lenght").innerHTML = "Товары не добавлены"
-    }else {
-      document.getElementById("items-lenght").innerHTML = `Добавлено ${items.lenght}`
-    }
+      if (items.length === 0) {
+        document.getElementById("items-lenght").innerHTML = "Товары отсутствуют";
+      } else {
+        document.getElementById("items-lenght").innerHTML = `Товаров добавелено: ${items.length}`;
+      }
   });
 
-  console.log(items)
+
+
+
 
   function handleFormSubmit(e) {
     e.preventDefault();
@@ -49,7 +58,6 @@ export default function Shop() {
       setName("");
       setDesc("");
       setValidation("");
-      setTotal(total + 1)
     }
 
   }
@@ -65,7 +73,6 @@ export default function Shop() {
 
   function handleDeleteClick() {
     setItems(items.splice(1));
-    setTotal(total - 1)
   }
 
   const uiTitle = (
