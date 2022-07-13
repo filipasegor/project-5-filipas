@@ -1,4 +1,6 @@
 import React from "react";
+import ButtonPrimary from "./ButtonPrimary.js";
+import TextField from "./TextField.js";
 
 
 export default function AddItem(props) {
@@ -7,7 +9,8 @@ export default function AddItem(props) {
       <form onSubmit={props.onFormSubmit}>
         <div>
           <label htmlFor="name"></label>
-          <input
+          <TextField
+            margin={"10px"}
             type="text"
             name="name"
             placeholder="Название товара"
@@ -18,7 +21,8 @@ export default function AddItem(props) {
         </div>
         <div>
           <label htmlFor="desc"></label>
-          <input
+          <TextField
+            margin={"10px"}
             type="text"
             name="desc"
             placeholder="Описание товара"
@@ -29,7 +33,8 @@ export default function AddItem(props) {
         </div>
         <div className="form-footer">
           <div className="validation">{props.validation}</div>
-          <input
+          <ButtonPrimary
+            margin={"10px"}
             type="submit"
             className="ui-button"
             value="Добавить"

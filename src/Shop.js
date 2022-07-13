@@ -3,6 +3,8 @@ import uuid from "react-uuid";
 import ItemsList from "./ItemsList.js";
 import Item from "./Item.js";
 import AddItem from "./AddItem.js";
+import UiTitle from "./UiTitle.js"
+
 
 export default function Shop() {
 
@@ -77,13 +79,13 @@ export default function Shop() {
 
   const uiTitle = (
     <div>
-      <h1 className="ui-title">Добавьте первый товар</h1>
+      <UiTitle fontSize={"50px"} margin={"10px"} className="ui-title">Добавьте первый товар</UiTitle>
     </div>
   );
 
   const uiTotal = (
     <div>
-      <h2 className="ui-title">Всего добавлено:</h2>
+      <UiTitle fontSize={"50px"} margin={"10px"} className="ui-title">Всего добавлено:</UiTitle>
     </div>
   )
 
@@ -93,7 +95,7 @@ export default function Shop() {
       <AddItem onFormSubmit={handleFormSubmit} name={name} onNameChange={handleNameChange} onDescChange={handleDescChange} desc={desc} onButtonClick={handleFormSubmit} validation={validation}/>
 
       <ItemsList onDeleteClick={handleDeleteClick} items={items} />
-      <h3 id="items-lenght"></h3>
+      <UiTitle fontSize={"20px"} margin={"40px 10px 20px 10px"} id="items-lenght"></UiTitle>
     </>
   );
 
